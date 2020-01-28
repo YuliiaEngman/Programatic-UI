@@ -20,8 +20,9 @@ class MainViewController: UIViewController {
         view = mainView
     }
 
-    override func viewDidLoad() {
+    override func viewDidLoad() { // called on initial load only once
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         // if some color is not supported by dark mode - it will be not displayed properly
         // therefore use systemOrange
         view.backgroundColor = .systemOrange
@@ -29,6 +30,22 @@ class MainViewController: UIViewController {
         
         // add target/action for reset button
         mainView.resetButton.addTarget(self, action: #selector(resetAppCollor(_:)), for: .touchUpInside) // .touchUpInside - is Enum (therefore we can access it through .  )
+    }
+    
+    
+    // USER DEFAULTS
+    // STEP 4 of
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateAppColor()
+    }
+    
+    // USER DEFAULTS
+    // STEP 3 of (Previous 2 steps inside SettingsViewController)
+    private func updateAppColor() {
+        if let colorName = UserDefaults.standard.object(forKey: AppKey.appColorKey) as? String {
+            view.backgroundColor = UIColor(named: colorName)
+        }
     }
     
     private func configureNavBar (){

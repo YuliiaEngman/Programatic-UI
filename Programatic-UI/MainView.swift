@@ -78,6 +78,7 @@ class MainView: UIView {
             
             // set padding at the trailing edge of the MainView (we constraining the label)
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+        
         ])
     }
     
